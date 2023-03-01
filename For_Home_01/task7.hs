@@ -1,7 +1,7 @@
 growingPlant :: Int -> Int -> Int -> Int
-growingPlant x y z 
- |x >= z = 1
- |
+growingPlant x y z
+ | z <= x = 1
+ | otherwise = 1 + growingPlant x y (z - x + y)
 
 main :: IO()
 main = do
