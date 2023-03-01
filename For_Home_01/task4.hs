@@ -7,7 +7,7 @@ myGcdG n m
 myGcdPM :: Int -> Int -> Int
 myGcdPM 0 m = m
 myGcdPM n 0 = n
-myGcdPM n m = myGcdG m (mod n m)
+myGcdPM n m = myGcdPM m (mod n m)
 
 main :: IO()
 main = do
