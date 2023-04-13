@@ -5,5 +5,5 @@ main = do
 
 applyN :: (a -> a) -> Int -> (a -> a)
 applyN _ 0 = id
-applyN f n = (\ x -> (apply f (n - 1)) (fx))
+applyN f n = (\ x -> (applyN f (n - 1)) (f x))
 
