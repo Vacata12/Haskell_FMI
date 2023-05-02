@@ -13,19 +13,17 @@ t = [(1,[2,3,4]),(2,[5,6]),(3,[7]),(4,[8,9]),(5,[]),(6,[10]),(7,[]),(8,[]),(9,[]
 getFather :: Tree -> Int -> Int
 getFather tree node = head [x | (x, y) <- tree, elem node y, length y > 0]
 
-getBrothers :: Tree -> Int -> [Int]
-getBrothers [] _ = []
-getBrothers tree node = helper tree node
- where
-     helper [] _ = []
-     helper copyTree node
-      | elem (getFather tree node) (snd (head copyTree)) = snd $ head copyTree
-      | otherwise = helper (tail copyTree) node
-
 findUncles :: Tree -> Int -> [Int]
-findUncles tree node = filter (/= getFather tree node) [z | z <- y]
+findUncles tree node = filter (/= getFather tree node) [z | z <- getBrothers tree node]
  where
-     y = getBrothers tree node
+     getBrothers :: Tree -> Int -> [Int]
+     getBrothers [] _ = []
+     getBrothers tree node = helper tree node
+      where
+          helper [] _ = []
+          helper copyTree node
+           | elem (getFather tree node) (snd (head copyTree)) = snd $ head copyTree
+           | otherwise = helper (tail copyTree) node
 
 
 
