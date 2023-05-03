@@ -12,8 +12,9 @@ data City = City Name Elevation AvgYearlyTemperature
 data Country = Country Name Capital [City]
 
 coldestCapital :: [Country] -> Name
-coldestCapital countries = countryName $ foldl (\ acc country -> if avgTemp (cities country) < avgTemp (cities acc) then country else acc) (head countries) countries
-  where countryName (Country name _ _) = name
+coldestCapital countries = countryName $ foldl1 (\x y -> if avgTemp (cities x) <= avgTemp (cities y) then x else y) countries
+  where 
+        countryName (Country name _ _) = name
         cities (Country _ _ cities) = cities
 
 avgTemp :: [City] -> Double
