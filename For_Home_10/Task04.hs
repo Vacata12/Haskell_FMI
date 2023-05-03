@@ -21,9 +21,9 @@ findUncles tree node = filter (/= getFather tree node) [z | z <- getBrothers tre
      getBrothers tree node = helper tree node
       where
           helper [] _ = []
-          helper copyTree node
-           | elem (getFather tree node) (snd (head copyTree)) = snd $ head copyTree
-           | otherwise = helper (tail copyTree) node
+          helper ((_, value):ts) node
+           | elem (getFather tree node) value = value
+           | otherwise = helper ts node
 
 
 
