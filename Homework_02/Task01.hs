@@ -1,10 +1,10 @@
 main :: IO()
 main = do
-    print $ getNameLengthColor db ((== 'Y'), (> 106))   == [("PrettyWoman",119),("The Man Who Wasn't There",116),("Logan'srun",120),("Empire Strikes Back",111),("Star Trek",132),("Star Trek:Nemesis",116)]
-    print $ getNameLengthColor db ((== 'Y'), (> 237))   == []
-    print $ getNameLengthColor db ((== 'Y'), (> 238))   == []
-    print $ getNameLengthColor db ((== 'N'), (< 133))   == [("Terms ofEndearment",132)]
-    print $ getNameLengthColor db ((== 'N'), (< 300))   == [("Terms ofEndearment",132)]
+    print $ getNameLengthColor db ((== 'Y'), (> 106))  == [("PrettyWoman",119),("The Man Who Wasn't There",116),("Logan'srun",120),("Empire Strikes Back",111),("Star Trek",132),("Star Trek:Nemesis",116)]
+    print $ getNameLengthColor db ((== 'Y'), (> 237))  == []
+    print $ getNameLengthColor db ((== 'Y'), (> 238))  == []
+    print $ getNameLengthColor db ((== 'N'), (< 133))  == [("Terms ofEndearment",132)]
+    print $ getNameLengthColor db ((== 'N'), (< 300))  == [("Terms ofEndearment",132)]
 
 
 getNameLengthColor :: MovieDB -> ((Char -> Bool), (Int -> Bool)) -> [(Title, Length)]
