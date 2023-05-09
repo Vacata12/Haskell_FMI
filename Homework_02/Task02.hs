@@ -6,15 +6,9 @@ main = do
     print $ (getStudios db) [1990, 2001, 1976] -- == [("Disney","MervGriffin"),("USA Entertainm.","Stephen Spielberg"),("BuzzfeedEntertainm.","Christian Baesler")]
     print $ (getStudios db) [1979, 2002] -- == [("Buzzfeed Entertainm.","ChristianBaesler")]
 
-getStudios :: MovieDB -> [Year] -> [(StudioName, Name)]
-getStudios (movies, studios, movieExecs) years = [(studioName, name) | (studioName, producerID) <- studios, (name, _, _) <- movieExecs, producerID == getProducerID db name, elem studioName (getStudioNames db years)] ++ getStudioWithNoMovies db
- where
-        getStudioNames :: MovieDB -> [Year] -> [StudioName]
-        getStudioNames (movies, studios, movieExecs) years = [studioName | (_, year, _, _, studioName) <- movies, elem year years]
-        getProducerID :: MovieDB -> Name -> ProducerID
-        getProducerID (movies, studios, movieExecs) name = head [producerID | (execName, producerID, _) <- movieExecs, execName == name]
-        getStudioWithNoMovies :: MovieDB -> [(StudioName, Name)]
-        getStudioWithNoMovies (movies, studios, movieExecs) = [(studioName, name) | (studioName, producerID) <- studios, (name, _, _) <- movieExecs, producerID == getProducerID db name, not (elem studioName (getStudioNames db [year | (_, year, _, _, studioName) <- movies]))]
+
+
+
 
 
         
