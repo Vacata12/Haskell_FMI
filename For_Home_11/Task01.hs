@@ -6,12 +6,12 @@ main = do
     print $ average numberBTree == 16.22
      --print $ average charBTree -- should not work
 
-    print $ sumLeaves numberBTree -- == 119
+    print $ sumLeaves numberBTree == 119
     -- --print $ sumLeaves charBTree -- shouldn't work
 
-    -- print $ areEqual numberBTree (Node 5 (Node 12 (Node 1 (Node 96 Nil Nil) Nil) (Node 0 Nil Nil)) (Node 4 (Node 2 Nil Nil) (Node 5 Nil Nil))) == False
-    -- print $ areEqual charBTree charBTree == True
-    -- print $ areEqual numberBTree (Node 5 (Node 12 (Node 1 (Node 96 Nil Nil) Nil) (Node 0 Nil Nil)) (Node 8 (Node 2 Nil Nil) (Node 5 Nil (Node 21 Nil Nil)))) == False
+    print $ areEqual numberBTree (Node 5 (Node 12 (Node 1 (Node 96 Nil Nil) Nil) (Node 0 Nil Nil)) (Node 4 (Node 2 Nil Nil) (Node 5 Nil Nil))) == False
+    print $ areEqual charBTree charBTree == True
+    print $ areEqual numberBTree (Node 5 (Node 12 (Node 1 (Node 96 Nil Nil) Nil) (Node 0 Nil Nil)) (Node 8 (Node 2 Nil Nil) (Node 5 Nil (Node 21 Nil Nil)))) == False
 
     -- print $ setLevels numberBTree == Node (0,5) (Node (1,12) (Node (2,1) (Node (3,96) Nil Nil) Nil) (Node (2,0) Nil Nil)) (Node (1,4) (Node (2,2) Nil Nil) (Node (2,5) Nil (Node (3,21) Nil Nil)))
     -- print $ setLevels charBTree == Node (0,'k') (Node (1,'a') (Node (2,'h') Nil Nil) (Node (2,'s') Nil Nil)) (Node (1,'l') (Node (2,'e') Nil Nil) (Node (2,'l') Nil Nil))
@@ -34,14 +34,21 @@ size :: BTree a -> Int
 size Nil = 0
 size (Node _ left right) = 1 + size left + size right
 
-
 average :: BTree Int -> Double
 average Nil = 0
 average tree = fromIntegral (sumTree tree) / fromIntegral (size tree)
 
-sumLeaves :: (Num a) => BTree a -> a
+sumLeaves :: (Num a, Eq a) => BTree a -> a
 sumLeaves Nil = 0
-sumLeaves(Node value left right) = value + sumTree left + sumTree right
+sumLeaves (Node root l r)
+ | l == Nil && r == Nil = root
+ | otherwise = sumLeaves l + sumLeaves r
+
+areEqual :: (Eq a) => BTree a -> BTree a -> Bool
+areEqual t1 t2 = t1 == t2
+
+
+
 
 numberBTree :: BTree Int
 numberBTree = Node 5 (Node 12 (Node 1 (Node 96 Nil Nil) Nil) (Node 0 Nil Nil)) (Node 4 (Node 2 Nil Nil) (Node 5 Nil (Node 21 Nil Nil)))
