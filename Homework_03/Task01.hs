@@ -4,6 +4,5 @@ main = do
 
 data NTree a = T a [(NTree a)]
  deriving (Show, Eq)
-
-
+ 
 
