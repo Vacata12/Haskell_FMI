@@ -1,3 +1,4 @@
+import Data.List
 main :: IO()
 main = do
     print $ isGraceful t1 == True
@@ -13,9 +14,9 @@ getList ::(Num a) => NTree a -> [a]
 getList (T r xs) = r : concatMap getList xs
 
 isGraceful ::(Num a) => NTree a -> Bool
-isGraceful tree = helper (getList tree) (abs (head (head (getList tree)) - head (getList tree)))
- where
-     helper (x:xs) dif
-      | abs(x - head xs) /= difference = False
+
+
+
+         
 
 
