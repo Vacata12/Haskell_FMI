@@ -9,7 +9,7 @@ data NTree a = T a [(NTree a)]
 t1 = T 1 [T 3 [], T 5 [], T 7 [], T 9 []]
 t2 = T 7 [T 9 [T 5 [], T 2 []]]
 
-getList :: NTree a -> [a]
+getList ::(Num a) => NTree a -> [a]
 getList (T r xs) = r : concatMap getList xs
 
 isGraceful ::(Num a) => NTree a -> Bool
