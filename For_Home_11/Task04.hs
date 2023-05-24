@@ -13,8 +13,12 @@ t2 = T 7 [T 9 [T 5 [], T 2 []]]
 getList ::(Num a) => NTree a -> [a]
 getList (T r xs) = r : concatMap getList xs
 
-isGraceful ::(Num a) => NTree a -> Bool
-
+isGraceful ::(Num a, Eq a, Ord a) => NTree a -> Bool
+isGraceful t = isGraceful' (sort (getList t)) ( head (tail (sort (getList t))) - (head (sort (getList t))) )
+ where
+  isGraceful' [] _ = True
+  isGraceful' [x] _ = True
+  isGraceful' (x:y:xs) dif = (y - x == dif) && isGraceful' xs dif
 
 
          
