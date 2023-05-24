@@ -11,19 +11,12 @@ len :: NTree a -> Int
 len (T _ []) = 0
 len (T _ xs) = 1 + sum (map len xs)
 
+
 prune :: (Num a, Eq a) => NTree a -> NTree a
-prune (T r xs) = helper (T r xs) r
- where
-     helper (T r xs) root
-       | len (T r xs) == 7 && r /= root = T r []
-       | otherwise =  T r 
+prune (T r xs)
+ | len (T r xs) < 1  = T r (map prune xs)
+ | otherwise = T r []
 
-
-
--- prune :: (Num a) => NTree a -> NTree a
--- prune (T r xs)
---  | map len xs > 2 = []
---  | otherwise = prune xs
 
 
 
