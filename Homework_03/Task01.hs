@@ -11,10 +11,14 @@ len :: NTree a -> Int
 len (T _ []) = 0
 len (T _ xs) = 1 + sum (map len xs)
 
+isStick :: [(NTree a)] -> Bool
+isStick [] = True
+isStick [T _ xs] = map len xs == []
+
 
 prune :: (Num a, Eq a) => NTree a -> NTree a
 prune (T r xs)
- | len (T r xs) < 1  = T r (map prune xs)
+ | len (T r xs) > 1 && not (isStick xs)  = T r (map prune xs)
  | otherwise = T r []
 
 
