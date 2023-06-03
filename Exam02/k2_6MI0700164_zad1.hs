@@ -5,4 +5,4 @@ main = do
  
 
 prodOdds :: Num a => [a] -> a
-prodOdds xs = foldr (\(i, x) acc -> if odd i then x * acc else acc) 1 (zip [0..] xs)
+prodOdds = foldr (\(i, x) acc -> if odd i then x * acc else acc) 1 . zip [0..] 
