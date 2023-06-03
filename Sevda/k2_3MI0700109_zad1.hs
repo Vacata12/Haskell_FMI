@@ -6,4 +6,4 @@ main = do
 prodOdds :: Num a => [a] -> a
 prodOdds = foldr (\(i, x) acc -> if odd i then x * acc else acc) 1 . zipWithIndex
   where
-    zipWithIndex xs = zip [0..] xs
+    zipWithIndex = zip [0..] 
